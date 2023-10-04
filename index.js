@@ -1,18 +1,36 @@
 'use strict'
 
-import _ from 'lodash';
-import './style.css';
+// import _ from 'lodash';
+// import './style.css';
 
 class Game {
     constructor({ color }) {
         this.background = color;
-        this.character = new Character({ positionX: 50, positionY: 345 });
+        this.character = new Character({ positionX: 300, positionY: 345 });
         this.obstacles = new Obstacles();
+        this.timer = new Timer();
     }
 
     draw() {
         const container = document.querySelector('#container');
         container.style.backgroundColor = this.background;
+    }
+}
+class Timer {
+    constructor() {
+        this.element = document.createElement('div');
+        this.element.id = 'timer';
+        document.getElementById('container').appendChild(this.element);
+        this.time = 0;
+        this.update();
+    }
+    update() {
+        this.element.innerText = this.time;
+    }
+
+    increment() {
+        this.time++;
+        this.update();
     }
 }
 
@@ -37,33 +55,50 @@ class Character {
         this.element.style.top = this.positionY + 'px';
     }
 
+    collisionCheck() {
+        newGame.obstacles.obstaclesArray.forEach(obstacle => {
+
+            if (this.positionX < obstacle.positionX + 50 &&
+                this.positionX + 50 > obstacle.positionX &&
+                this.positionY < obstacle.positionY + obstacle.height &&
+                this.positionY + 50 > obstacle.positionY) {
+                console.log('Game Over');
+            }
+        });
+    }
+
+
     decreaseLife() {
         this.life -= 1;
     }
 }
 
 class Obstacle {
-    constructor({ positionX }) {
+    constructor({ positionX, positionY, height }) {
         this.element = document.createElement('div');
-        this.element.id = 'obstacle';
+        this.element.className = 'obstacle';
         this.positionX = positionX;
-        this.positionY = 0; 
+        this.positionY = positionY;
+        this.height = height;
+        this.element.style.height = this.height + 'px';
         this.updatePosition();
-
-        
         document.getElementById('container').appendChild(this.element);
     }
 
     updatePosition() {
         this.element.style.left = this.positionX + 'px';
-        this.element.style.bottom = this.positionY + 'px';
+        this.element.style.top = this.positionY + 'px';
     }
 
+
     move() {
-        this.positionX -= 5; 
+        this.positionX -= 1.5;
         this.updatePosition();
+        // console.log("x: ",this.positionX,"Y:", this.positionY);
     }
 }
+
+
 
 
 
@@ -71,32 +106,83 @@ class Obstacle {
 class Obstacles {
     constructor() {
         this.obstaclesArray = [];
-    }
+
+    };
 
     generate() {
-        const obstacle = new Obstacle({ positionX: 1024 });
-        this.obstaclesArray.push(obstacle);
+        const gap = 100;  // Abstand zwischen den Hindernissen
+
+        const containerHeight = 768; // Höhe des Containers
+        const minHeight = 100; // Minimale Höhe eines Hindernisses
+        const maxHeight = containerHeight - gap - minHeight; // Maximale Höhe eines Hindernisses
+
+        // Zufällige Höhe für das untere Hindernis
+        const obstacleBottomHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+
+        // Höhe für das obere Hindernis
+        const obstacleTopHeight = containerHeight - gap - obstacleBottomHeight;
+
+        // Berechnung der Position für das obere Hindernis, wenn von oben gemessen wird
+        const obstacleTop = new Obstacle({ positionX: 1024, positionY: 0, height: obstacleTopHeight });
+
+        // Ändern der Position für das untere Hindernis, wenn von oben gemessen wird
+        const obstacleBottom = new Obstacle({ positionX: 1024, positionY: obstacleTopHeight + gap, height: obstacleBottomHeight });
+
+        this.obstaclesArray.push(obstacleBottom, obstacleTop);
+        
+
     }
 
-    move() {
-        this.obstaclesArray.forEach(obstacle => {
+
+
+    move() {        // bewegung der obctales, entfernen sobald die posi y -50 ist
+        this.obstaclesArray.forEach((obstacle, index) => {
             obstacle.move();
-        });
+            if (obstacle.positionX < -50) {
+                obstacle.element.remove();  // E
+                this.obstaclesArray.splice(index, 1);
+            }
+        })
     }
 }
 
 
 let newGame;
 
-function initialGame() {
+// function increaseInterval(){  //Test funktion für die erhöhung des abstandes der Hindernisse
+//     let count = 500;
+
+// const intervalID = setInterval(() => {
+//     if (count < 1000) {
+//         count += 50;
+//         console.log(count);
+//     } else {
+//         clearInterval(intervalID); 
+//     }
+// }, 2000);
+
+
+
+// }
+
+function initialGame() {        //erstellt neues Game Objekt
     newGame = new Game({ color: 'blue' });
     newGame.draw();
 
 
-    //generieren der Hindernisse
-    newGame.obstacles.generate();
-    
-    // Event-Listener für Tastendrücke
+
+    setInterval(() => { // abstand zwischen erzeugen neuer hinternisse 
+        newGame.obstacles.generate();
+
+    }, 3000); //increase Interval als test (funktion increaseInterval gehört hier dazu)
+
+    setInterval(() => { // Timer Intervalsetzen
+        newGame.timer.increment();
+    }, 1000);
+
+
+
+    // Event-Listener für die Tastendrücke
     document.addEventListener('keydown', (event) => {
         const key = event.key;
         let newX = newGame.character.positionX;
@@ -109,12 +195,14 @@ function initialGame() {
 
         newGame.character.move(newX, newY);
     });
-    function gameLoop() {
+    function animate() {
         newGame.obstacles.move();
-        requestAnimationFrame(gameLoop);
+        newGame.character.collisionCheck();
+        requestAnimationFrame(animate);
     }
-    gameLoop();
+    animate();
 }
+
 
 initialGame();
 
