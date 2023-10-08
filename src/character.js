@@ -19,6 +19,17 @@ export default class Character {
         this.element.style.top = this.positionY + 'px';
     }
 
+    applyGravity(){
+        const gravity = 0.02;
+        const maxVelocity = 5; //max fallgeschw.
+
+        this.velocity += gravity
+        this.velocity = Math.min(this.velocity, maxVelocity)
+
+        this.positionY += this.velocity; //aktualisieren der y posi
+        this.updatePosition(); // dom posi aktual
+    }
+
     collisionCheck(obstaclesArray) {
         obstaclesArray.forEach(obstacle => {
 

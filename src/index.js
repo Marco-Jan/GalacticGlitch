@@ -1,6 +1,6 @@
 'use strict'
 
-// import _ from 'lodash';
+import _ from 'lodash';
 import Game from './game.js';
 // import '../style.css';
 
@@ -55,7 +55,8 @@ function initialGame() {        //erstellt neues Game Objekt
     });
     function animate() {
         newGame.obstacles.move();
-        newGame.character.collisionCheck(newGame.obstacles.obstaclesArray, timer);
+        newGame.character.applyGravity()
+        newGame.character.collisionCheck(newGame.obstacles.obstaclesArrayw);
         requestAnimationFrame(animate);
     }
     animate();
