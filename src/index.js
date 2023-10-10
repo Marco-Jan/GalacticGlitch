@@ -36,6 +36,7 @@ function initialGame() {        //erstellt neues Game Objekt
 
     setInterval(() => { 
         newGame.timer.increment();
+        newGame.timer.updatePoints();
     }, 1000);  // Timer Intervalsetzen 1000 = 1 s nicht ändern!!!!
 
 
@@ -54,13 +55,15 @@ function initialGame() {        //erstellt neues Game Objekt
         newGame.character.move(newX, newY);
     });
     function animate() {
-        newGame.obstacles.move();
-        newGame.character.applyGravity()
-        newGame.character.collisionCheck(newGame.obstacles.obstaclesArrayw);
+        newGame.obstacles.move(newGame);
+        // newGame.character.applyGravity()
+        newGame.character.collisionCheck(newGame.obstacles.obstaclesArray, newGame);
         requestAnimationFrame(animate);
     }
     animate();
 }
+
+
 
 
 initialGame();

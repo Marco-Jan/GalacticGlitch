@@ -19,31 +19,43 @@ export default class Character {
         this.element.style.top = this.positionY + 'px';
     }
 
-    applyGravity(){
-        const gravity = 0.02;
-        const maxVelocity = 5; //max fallgeschw.
+    w
 
-        this.velocity += gravity
-        this.velocity = Math.min(this.velocity, maxVelocity)
-
-        this.positionY += this.velocity; //aktualisieren der y posi
-        this.updatePosition(); // dom posi aktual
-    }
-
-    collisionCheck(obstaclesArray) {
+    collisionCheck(obstaclesArray, newGame) {
+        if (newGame.collisionDetected) {
+            return;  // Beende die Methode, wenn bereits eine Kollision erkannt wurde
+        }
         obstaclesArray.forEach(obstacle => {
 
             if (this.positionX < obstacle.positionX + 50 &&
                 this.positionX + 50 > obstacle.positionX &&
                 this.positionY < obstacle.positionY + obstacle.height &&
                 this.positionY + 50 > obstacle.positionY) {
-                // timer.resetTimer();
+
+                newGame.collisionDetected = true;
+                this.decreaseLife();
+                setTimeout(() => {
+                    newGame.reset();
+
+
+                }, 500)
+
+                newGame.togglePause();
+                console.log('game over');
             }
         });
     }
 
 
+    updateLifeCount() {
+        document.getElementById('lifeCount').innerText = `Leben: ${this.life}`;
+    }
+
     decreaseLife() {
         this.life -= 1;
+        this.updateLifeCount();
+
     }
+
+
 }

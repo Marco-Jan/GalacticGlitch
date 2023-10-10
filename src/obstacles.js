@@ -17,7 +17,7 @@ class Obstacle {
 
 
     move() {
-        this.positionX -= 1;
+        this.positionX -= 1;  //geschw. der hinternisse 
         this.updatePosition();
         // console.log("x: ",this.positionX,"Y:", this.positionY);
     }
@@ -60,14 +60,16 @@ export default class Obstacles {
 
 
 
-    move() {        // bewegung der obctales, werden entfernt sobald die posi y -50 ist
-        this.obstaclesArray.forEach((obstacle, index) => {
-            obstacle.move();
-            if (obstacle.positionX < -50) {
-                obstacle.element.remove();  // E
-                this.obstaclesArray.splice(index, 1);
-            }
-        })
+    move(newGame) {        
+        if (!newGame.isPaused) {  // Überprüft, ob das Spiel pausiert ist
+            this.obstaclesArray.forEach((obstacle, index) => {
+                obstacle.move();
+                if (obstacle.positionX < -50) { //löscht die hinternisse ab y -50 aus dem array
+                    obstacle.element.remove();
+                    this.obstaclesArray.splice(index, 1);
+                }
+            });
+        }
     }
 
 }
