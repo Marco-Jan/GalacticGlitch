@@ -30,8 +30,10 @@ export default class Game {
         });
         
 
-    
+        
+
         this.obstacles.obstaclesArray = [];
+        
         setInterval(() => { 
             this.obstacles.generate(this); //this geht hier im calllback verloren 
         }, 2500);
