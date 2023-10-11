@@ -23,6 +23,8 @@ let newGame;
 
 // }
 
+let obstacleInterval;
+
 function initialGame() {        //erstellt neues Game Objekt
     newGame = new Game({ color: 'blue' });
     newGame.draw();
@@ -36,7 +38,6 @@ function initialGame() {        //erstellt neues Game Objekt
 
     setInterval(() => { 
         newGame.timer.increment();
-        newGame.timer.updatePoints();
     }, 1000);  // Timer Intervalsetzen 1000 = 1 s nicht ändern!!!!
 
 
@@ -47,16 +48,26 @@ function initialGame() {        //erstellt neues Game Objekt
         let newX = newGame.character.positionX;
         let newY = newGame.character.positionY;
 
-        if (key === 'w') newY -= 10;
-        else if (key === 's') newY += 10;
+        if (key === 'w') newGame.character.velocity = -1;
+        else if (key === 's') newGame.character.velocity = 1;
         else if (key === 'a') newX -= 10;
         else if (key === 'd') newX += 10;
 
         newGame.character.move(newX, newY);
     });
+
+    document.getElementById('restartButton').addEventListener('click', () => {
+        clearInterval(obstacleInterval);  
+        newGame.restart();
+        // obstacleInterval = setInterval(() => {
+        //     newGame.obstacles.generate();
+        // }, 2500);
+    });
+      
+
     function animate() {
         newGame.obstacles.move(newGame);
-        // newGame.character.applyGravity()
+        newGame.character.applyGravity()
         newGame.character.collisionCheck(newGame.obstacles.obstaclesArray, newGame);
         requestAnimationFrame(animate);
     }

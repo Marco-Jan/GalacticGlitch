@@ -1,10 +1,24 @@
 class Obstacle {
-    constructor({ positionX, positionY, height }) {
+    constructor({ positionX, positionY, height, type }) {
         this.element = document.createElement('div');
-        this.element.className = 'obstacle';
+        // this.element.className = 'obstacle';
+        this.element.className = `obstacle ${type}`;
+
+        
+        if (type === 'asteroid') {
+            this.element.style.backgroundImage = "url('../img/space_ship.jpg')";
+            this.element.style.width = '50px';
+            this.element.style.height = '50px';
+        } else if (type === 'spaceship') {
+            this.element.style.backgroundImage = "url('../img/asteroid-isolated.jpg')";
+            this.element.style.width = '30px';
+            this.element.style.height = '30px';
+        }
+
         this.positionX = positionX;
         this.positionY = positionY;
         this.height = height;
+        
         this.element.style.height = this.height + 'px';
         this.updatePosition();
         document.getElementById('container').appendChild(this.element);
@@ -15,13 +29,12 @@ class Obstacle {
         this.element.style.top = this.positionY + 'px';
     }
 
-
     move() {
-        this.positionX -= 1;  //geschw. der hinternisse 
+        this.positionX -= 1;  // Geschwindigkeit der Hindernisse
         this.updatePosition();
-        // console.log("x: ",this.positionX,"Y:", this.positionY);
     }
 }
+
 
 export default class Obstacles {
     constructor() {
@@ -30,41 +43,37 @@ export default class Obstacles {
     };
 
     generate() {
-        const gap = 100;  // Abstand zwischen den Hindernissen
-
-        const containerHeight = 768; // Höhe des Containers
-        const minHeight = 100; // Minimale Höhe eines Hindernisses
-        const maxHeight = containerHeight - gap - minHeight; // Maximale Höhe eines Hindernisses
-
-        // Zufällige Höhe für das untere Hindernis
+        const gap = 100;  
+        const containerHeight = 500; 
+        const minHeight = 10; 
+        const maxHeight = containerHeight - gap - minHeight; 
+    
         const obstacleBottomHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-
-        // Höhe für das obere Hindernis
+    
         const obstacleTopHeight = containerHeight - gap - obstacleBottomHeight;
-
-        // Berechnung der Position für das obere Hindernis, wenn von oben gemessen wird
-        const obstacleTop = new Obstacle({ positionX: 1024, positionY: 0, height: obstacleTopHeight });
-
-        // Ändern der Position für das untere Hindernis, wenn von oben gemessen wird
-        const obstacleBottom = new Obstacle({ positionX: 1024, positionY: obstacleTopHeight + gap, height: obstacleBottomHeight });
-
+    
+        const obstacleTopType = Math.random() > 0.5 ? 'asteroid' : 'spaceship';
+    
+        const obstacleBottomType = obstacleTopType === 'asteroid' ? 'spaceship' : 'asteroid'; 
+        const obstacleTop = new Obstacle({ positionX: 1024, positionY: 0, height: obstacleTopHeight, type: obstacleTopType });
+    
+        const obstacleBottom = new Obstacle({ positionX: 1024, positionY: obstacleTopHeight + gap, height: obstacleBottomHeight, type: obstacleBottomType });
+    
         this.obstaclesArray.push(obstacleBottom, obstacleTop);
-
-
+    
         console.log(this.obstaclesArray);
-        
-
     }
+    
 
     
 
 
 
     move(newGame) {        
-        if (!newGame.isPaused) {  // Überprüft, ob das Spiel pausiert ist
+        if (!newGame.isPaused) {  
             this.obstaclesArray.forEach((obstacle, index) => {
                 obstacle.move();
-                if (obstacle.positionX < -50) { //löscht die hinternisse ab y -50 aus dem array
+                if (obstacle.positionX < -50) { 
                     obstacle.element.remove();
                     this.obstaclesArray.splice(index, 1);
                 }

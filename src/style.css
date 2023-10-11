@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0;
     padding: 0;
 }
@@ -18,28 +18,27 @@ body{
     position: absolute;
     background-image: url();
 }
+
 .obstacle {
-    width: 50px;
-    height: 500px;
-    background-color: green;
     position: absolute;
-    bottom: 0;
 }
-#timer{
+
+#timer {
     position: absolute;
     top: 10px;
     left: 30px;
     font-size: 24px;
     z-index: 1;
-    color: aliceblue;  
+    color: aliceblue;
 }
-#points{
+
+#points {
     position: absolute;
     top: 10px;
     left: 950px;
     font-size: 24px;
     z-index: 1;
-    color: aliceblue;  
+    color: aliceblue;
 
 }
 
@@ -49,6 +48,43 @@ body{
     left: 500px;
     font-size: 24px;
     z-index: 1;
-    color: aliceblue; 
+    color: aliceblue;
 }
 
+.hidden {
+    display: none;
+}
+
+#gameOver {
+    position: absolute;
+    top: 250px;
+    left: 270px;
+    font-size: 48px;
+    z-index: 1;
+    color: aliceblue;
+}
+
+#restartButton {
+    position: absolute;
+    top: 400px;
+    left: 400px;
+    font-size: 48px;
+    z-index: 1;
+    color: rgb(17, 17, 17);
+}
+
+.asteroid {
+    background-image: url('../img/space_ship.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
+
+.spaceship {
+    background-image: url('../img/asteroid-isolated.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+}

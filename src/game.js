@@ -23,31 +23,32 @@ export default class Game {
         this.character.positionY = 345;
         this.timer.resetTimer();
         this.character.updatePosition();
+        this.collisionDetected = false;
 
-    
+
         this.obstacles.obstaclesArray.forEach(obstacle => {
             obstacle.element.remove();
         });
-        
-
-        
-
         this.obstacles.obstaclesArray = [];
-        
-        setInterval(() => { 
-            this.obstacles.generate(this); //this geht hier im calllback verloren 
-        }, 2500);
-        
-    
+
+        // this.obstacles.generate();
+
     }
 
-    togglePause() {
-        this.isPaused = !this.isPaused;
-    
+    gameOver() {
+        this.isPaused = true;
+        document.getElementById('gameOver').classList.remove('hidden');
     }
-    
-    
-    
+
+    restart() {
+        this.reset();
+        document.getElementById('gameOver').classList.add('hidden');
+        this.isPaused = false;
+    }
+
+
+
+
 
 
 }

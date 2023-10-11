@@ -19,12 +19,8 @@ export default class Character {
         this.element.style.top = this.positionY + 'px';
     }
 
-    w
 
     collisionCheck(obstaclesArray, newGame) {
-        if (newGame.collisionDetected) {
-            return;  // Beende die Methode, wenn bereits eine Kollision erkannt wurde
-        }
         obstaclesArray.forEach(obstacle => {
 
             if (this.positionX < obstacle.positionX + 50 &&
@@ -33,29 +29,23 @@ export default class Character {
                 this.positionY + 50 > obstacle.positionY) {
 
                 newGame.collisionDetected = true;
-                this.decreaseLife();
+                 
                 setTimeout(() => {
-                    newGame.reset();
+                    newGame.reset();  
+                }, 500);
 
+                newGame.gameOver();
 
-                }, 500)
-
-                newGame.togglePause();
+                // newGame.togglePause();
                 console.log('game over');
             }
         });
     }
-
-
-    updateLifeCount() {
-        document.getElementById('lifeCount').innerText = `Leben: ${this.life}`;
+    applyGravity() {
+        const gravity = 0.01;
+        this.velocity += gravity;
+        this.positionY += this.velocity;
+        this.updatePosition();
     }
-
-    decreaseLife() {
-        this.life -= 1;
-        this.updateLifeCount();
-
-    }
-
-
+    
 }
