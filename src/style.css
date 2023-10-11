@@ -74,7 +74,7 @@ body {
 }
 
 .asteroid {
-    background-image: url('../img/space_ship.jpg');
+    /* background-image: url('../img/space_ship.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
     width: 50px;
@@ -82,7 +82,7 @@ body {
 }
 
 .spaceship {
-    background-image: url('../img/asteroid-isolated.jpg');
+    /* background-image: url('../img/asteroid-isolated.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;

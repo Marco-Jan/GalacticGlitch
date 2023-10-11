@@ -34,7 +34,7 @@ function initialGame() {        //erstellt neues Game Objekt
     setInterval(() => { // abstand zwischen erzeugen neuer hinternisse 
         newGame.obstacles.generate();
 
-    }, 2500); //increase Interval als test (funktion increaseInterval gehört hier dazu)
+    }, 1000); //increase Interval als test (funktion increaseInterval gehört hier dazu)
 
     setInterval(() => { 
         newGame.timer.increment();
