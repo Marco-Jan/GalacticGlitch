@@ -11,8 +11,8 @@ class Obstacle {
             this.element.style.height = '50px';
         } else if (type === 'spaceship') {
             this.element.style.backgroundImage = "url('../img/asteroid-isolated.jpg')";
-            this.element.style.width = '30px';
-            this.element.style.height = '30px';
+            this.element.style.width = '50px';
+            this.element.style.height = '50px';
         }
 
         this.positionX = positionX;
@@ -44,7 +44,7 @@ export default class Obstacles {
 
     generate() {
         const gap = 100;  
-        const containerHeight = 500; 
+        const containerHeight = 50; 
         const minHeight = 10; 
         const maxHeight = containerHeight - gap - minHeight; 
     
