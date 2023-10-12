@@ -39,8 +39,8 @@ export default class Character {
     updatePosition() {
         this.element.style.left = this.positionX + 'px';
         this.element.style.top = this.positionY + 'px';
-        this.rocketFlame.style.left = this.positionX + 20 + 'px';
-        this.rocketFlame.style.top = this.positionY + 40 + 'px';
+        this.rocketFlame.style.left = this.positionX + 45 + 'px';
+        this.rocketFlame.style.top = this.positionY + 90 + 'px';
         this.innerX = this.positionX + 5;
         this.innerY = this.positionY + 5;
     }

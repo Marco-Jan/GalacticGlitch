@@ -57,7 +57,7 @@ export default class Obstacles {
         const containerWidth = container.offsetWidth;
         const containerHeight = container.offsetHeight;  // Spielfeldhöhe
         const minHeight = 50;  // Mindesthöhe eines Hindernisses
-        const gap = 200;
+        const gap = 350;
         const maxHeight = containerHeight - gap - minHeight;  // Maximale Höhe eines Hindernisses
 
         const randomPositionY = Math.floor(Math.random() * (maxHeight - minHeight) + minHeight);

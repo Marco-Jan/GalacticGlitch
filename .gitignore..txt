@@ -1,0 +1,23 @@
+# Node-Module
+node_modules/
+
+# Logs
+*.log
+
+# Runtime-Daten
+pids
+*.pid
+*.seed
+
+# Verzeichnis für IDEs und Editoren
+.idea/
+.vscode/
+
+# Temporäre Dateien
+*.tmp
+
+# Build-Verzeichnis
+
+
+# .env Datei
+.env

@@ -6,7 +6,7 @@ import Timer from './timer.js';
 export default class Game {
     constructor() {
         this.background = "url('../img/carina_bg.jpeg')";
-        this.character = new Character({ positionX: 300, positionY: 345 });
+        this.character = new Character({ positionX: 600, positionY: 345 });
         this.obstacles = new Obstacles();
         this.timer = new Timer();
         this.isPaused = false;
