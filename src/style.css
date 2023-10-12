@@ -1,22 +1,72 @@
 body {
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(24, 41, 61);
+
 }
 
 #container {
-    width: 1024px;
-    height: 768px;
+    width: 90%;
+    height: 90%;
     position: relative;
     overflow: hidden;
-    background-color: white;
+    background-color: rgb(41, 19, 19);
+    
 }
+
+#startScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-size:auto;
+    background-repeat: no-repeat;
+}
+
+
+#start_btn {
+    width: 200px;
+    height: 50px;
+    margin-bottom: 30px;
+    background-color: rgb(61, 136, 38);
+    color: aliceblue;
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#start_btn:hover {
+    background-color: rgb(61, 136, 38);
+    color: #050801;
+    box-shadow: 0 0 5px rgb(61, 136, 38),
+                0 0 25px rgb(61, 136, 38),
+                0 0 50px rgb(61, 136, 38),
+                0 0 200px rgb(61, 136, 38);
+    -webkit-box-reflect: below 5px linear-gradient(transparent,#0005);
+}
+
+/* #highscores {
+    margin-top: 20px;
+} */
+
 
 #character {
     width: 50px;
     height: 50px;
-    background-color: rgb(255, 102, 0);
     position: absolute;
-    background-image: url();
+    /* background-color: aliceblue; */
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .obstacle {
@@ -57,34 +107,43 @@ body {
 
 #gameOver {
     position: absolute;
-    top: 250px;
-    left: 270px;
-    font-size: 48px;
+    font-size: 10em;
+    top: 1.8em;
+    left: 3em;
     z-index: 1;
     color: aliceblue;
 }
 
 #restartButton {
     position: absolute;
-    top: 400px;
-    left: 400px;
-    font-size: 48px;
+    top: 7em;
+    left: 9.4em;
+    font-size: 5em;
     z-index: 1;
     color: rgb(17, 17, 17);
 }
 
 .asteroid {
+    padding: 0;
     /* background-image: url('../img/space_ship.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
+    
 }
 
 .spaceship {
+    padding: 0;
     /* background-image: url('../img/asteroid-isolated.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
-    width: 30px;
-    height: 30px;
+    
+}
+
+.flame {
+    width: 10px;
+    height: 20px;
+    /* background-color: red; */
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

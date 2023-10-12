@@ -2,40 +2,36 @@
 
 import _ from 'lodash';
 import Game from './game.js';
-// import '../style.css';
+import initStartPage from './startPage.js';
 
+
+
+
+
+
+initStartPage();
 
 let newGame;
 
-// function increaseInterval(){  //Test funktion für die erhöhung des abstandes der Hindernisse
-//     let count = 500;
+let obstacleInterval = 2500;
 
-// const intervalID = setInterval(() => {
-//     if (count < 1000) {
-//         count += 50;
-//         console.log(count);
-//     } else {
-//         clearInterval(intervalID); 
-//     }
-// }, 2000);
-
-
-
-// }
-
-let obstacleInterval;
-
-function initialGame() {        //erstellt neues Game Objekt
-    newGame = new Game({ color: 'blue' });
+export function initialGame() {        //erstellt neues Game Objekt
+    newGame = new Game();
     newGame.draw();
 
 
 
-    setInterval(() => { // abstand zwischen erzeugen neuer hinternisse 
-        newGame.obstacles.generate();
+    
 
-    }, 1000); //increase Interval als test (funktion increaseInterval gehört hier dazu)
-
+    setInterval(() => { 
+        newGame.obstacles.generate('asteroid');
+    }, 3000);  // Asteroiden werden alle 500 ms generiert
+    
+    setInterval(() => { 
+        newGame.obstacles.generate('spaceship');
+    }, 2500);  // Raumschiffe werden alle 700 ms generiert
+    
+    
     setInterval(() => { 
         newGame.timer.increment();
     }, 1000);  // Timer Intervalsetzen 1000 = 1 s nicht ändern!!!!
@@ -48,13 +44,23 @@ function initialGame() {        //erstellt neues Game Objekt
         let newX = newGame.character.positionX;
         let newY = newGame.character.positionY;
 
-        if (key === 'w') newGame.character.velocity = -1;
-        else if (key === 's') newGame.character.velocity = 1;
+        if (key === 'w') {
+            newGame.character.velocity = -1;
+            newGame.character.toggleFlame(true);
+
+        }else if (key === 's') newGame.character.velocity = 1;
         else if (key === 'a') newX -= 10;
         else if (key === 'd') newX += 10;
 
         newGame.character.move(newX, newY);
     });
+
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'w') {
+            newGame.character.toggleFlame(false);
+        }
+    });
+
 
     document.getElementById('restartButton').addEventListener('click', () => {
         clearInterval(obstacleInterval);  
@@ -74,8 +80,4 @@ function initialGame() {        //erstellt neues Game Objekt
     animate();
 }
 
-
-
-
-initialGame();
 

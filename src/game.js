@@ -4,8 +4,8 @@ import Timer from './timer.js';
 
 
 export default class Game {
-    constructor({ color }) {
-        this.background = color;
+    constructor() {
+        this.background = "url('../img/carina_bg.jpeg')";
         this.character = new Character({ positionX: 300, positionY: 345 });
         this.obstacles = new Obstacles();
         this.timer = new Timer();
@@ -15,7 +15,7 @@ export default class Game {
 
     draw() {
         const container = document.querySelector('#container');
-        container.style.backgroundColor = this.background;
+        container.style.backgroundImage = this.background;
     }
 
     reset() {
@@ -37,14 +37,15 @@ export default class Game {
 
     gameOver() {
         this.isPaused = true;
-        document.getElementById('gameOver').classList.remove('hidden');
+        document.getElementById('gameOverContainer').classList.remove('hidden');
     }
-
+    
     restart() {
         this.reset();
-        document.getElementById('gameOver').classList.add('hidden');
+        document.getElementById('gameOverContainer').classList.add('hidden');
         this.isPaused = false;
     }
+    
 
 
 
