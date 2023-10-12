@@ -47,6 +47,8 @@ export function initialGame() {        //erstellt neues Game Objekt
         if (key === 'w') {
             newGame.character.velocity = -1;
             newGame.character.toggleFlame(true);
+            rocketSound.currentTime = 0;
+            rocketSound.play();
 
         }else if (key === 's') newGame.character.velocity = 1;
         else if (key === 'a') newX -= 10;
