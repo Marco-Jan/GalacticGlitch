@@ -53,7 +53,7 @@ export default class Character {
                 this.innerY < obstacle.innerY + obstacle.innerHeight &&
                 this.innerY + this.innerHeight > obstacle.innerY) {
 
-                newGame.collisionDetected = true;
+                // newGame.collisionDetected = true;
                 setTimeout(() => {
                     newGame.reset();
                 }, 500);
