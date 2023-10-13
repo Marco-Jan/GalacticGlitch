@@ -36,14 +36,15 @@ export default class Game {
     }
 
     gameOver() {
-        this.isPaused = true;
+        this.isPaused = true; // setzt  true in der move() obstacles methode  
         document.getElementById('gameOverContainer').classList.remove('hidden');
     }
     
     restart() {
         this.reset();
         document.getElementById('gameOverContainer').classList.add('hidden');
-        this.isPaused = false;
+        this.isPaused = false;         this.isPaused = true; // setzt  false in der move() obstacles methode  
+
     }
  
 }

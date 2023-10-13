@@ -18,24 +18,24 @@ export default class Character {
     }
 
     move(newPositionX, newPositionY) {
-        
-        const maxOben = container.offsetWidth - this.innerWidth;  
-        const maxUnten = container.offsetHeight - this.innerHeight;  
+
+        const maxOben = container.offsetWidth - this.innerWidth;
+        const maxUnten = container.offsetHeight - this.innerHeight;
 
         this.positionX = newPositionX;
         this.positionY = newPositionY;
-    
+
         // Überprüfen, ob die neue Position innerhalb der Grenzen liegt
         if (newPositionX < 0) newPositionX = 0;
         if (newPositionX > maxOben) newPositionX = maxOben;
         if (newPositionY < 0) newPositionY = 0;
         if (newPositionY > maxUnten) newPositionY = maxUnten;
-    
+
         // Position aktualisieren
-        
+
         this.updatePosition();
     }
-    
+
 
     updatePosition() {
         this.element.style.left = this.positionX + 'px';
@@ -53,12 +53,14 @@ export default class Character {
                 this.innerY < obstacle.innerY + obstacle.innerHeight &&
                 this.innerY + this.innerHeight > obstacle.innerY) {
 
+                newGame.gameOver();
+
                 // newGame.collisionDetected = true;
                 setTimeout(() => {
                     newGame.reset();
                 }, 500);
 
-                newGame.gameOver();
+
             }
         });
     }
@@ -67,16 +69,16 @@ export default class Character {
         const gravity = 0.01;
         this.velocity += gravity;
         this.positionY += this.velocity;
-    
+
         // Dynamisch die untere Grenze ermitteln
         const container = document.getElementById('container');
         const maxY = container.offsetHeight - this.innerHeight;  // Containerhöhe - Char
         console.log(container.offsetHeight);
         if (this.positionY > maxY) {
             this.positionY = maxY;
-            this.velocity = 0;  
+            this.velocity = 0;
         }
-    
+
         this.updatePosition();
     }
 

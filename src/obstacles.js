@@ -6,10 +6,10 @@ class Obstacle {
         this.width = Math.floor(Math.random() * 250);  // Random width between 50 and 500
         this.height = this.width;
 
-        this.innerX = this.positionX + 10;  // oder ein anderer Offset
-        this.innerY = this.positionY + 10;  // oder ein anderer Offset
-        this.innerWidth = this.width - 50;  // oder eine andere Größe
-        this.innerHeight = this.height - 50; // oder eine andere Größe
+        this.innerX = this.positionX + 10;  // Offset
+        this.innerY = this.positionY + 10;  //  Offset
+        this.innerWidth = this.width - 50;  //  innere hitbox Größe
+        this.innerHeight = this.height - 50; // innere hitbox Größe
 
         if (type === 'asteroid') {
             this.element.style.backgroundImage = "url('../img/space_ship.png')";
@@ -23,7 +23,7 @@ class Obstacle {
 
             // console.log(this.element);
         }
-        
+
 
         this.positionX = positionX;
         this.positionY = positionY;
