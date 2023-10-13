@@ -20,8 +20,8 @@ export default class Character {
     move(newPositionX, newPositionY) {
         // Grenzwerte 
         const container = document.getElementById('container');
-        const maxOben = container.offsetWidth - this.innerWidth;  // Berücksichtige die Breite des Charakters
-        const maxUnten = container.offsetHeight - this.innerHeight;  // Berücksichtige die Höhe des Charakters
+        const maxOben = container.offsetWidth - this.innerWidth;  
+        const maxUnten = container.offsetHeight - this.innerHeight;  
     
         // Überprüfen, ob die neue Position innerhalb der Grenzen liegt
         if (newPositionX < 0) newPositionX = 0;

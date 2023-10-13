@@ -13,7 +13,6 @@ initStartPage();
 
 let newGame;
 
-let obstacleInterval = 2500;
 
 export function initialGame() {        //erstellt neues Game Objekt
     newGame = new Game();
@@ -25,11 +24,11 @@ export function initialGame() {        //erstellt neues Game Objekt
 
     setInterval(() => { 
         newGame.obstacles.generate('asteroid');
-    }, 3000);  // Asteroiden werden alle 500 ms generiert
+    }, 3000);  
     
     setInterval(() => { 
         newGame.obstacles.generate('spaceship');
-    }, 2500);  // Raumschiffe werden alle 700 ms generiert
+    }, 2500);  
     
     
     setInterval(() => { 
@@ -64,12 +63,9 @@ export function initialGame() {        //erstellt neues Game Objekt
     });
 
 
-    document.getElementById('restartButton').addEventListener('click', () => {
-        clearInterval(obstacleInterval);  
+    document.getElementById('restartButton').addEventListener('click', () => {  
         newGame.restart();
-        // obstacleInterval = setInterval(() => {
-        //     newGame.obstacles.generate();
-        // }, 2500);
+        
     });
       
 
