@@ -19,9 +19,6 @@ export function initialGame() {        //erstellt neues Game Objekt
     newGame.draw();
 
 
-
-
-
     setInterval(() => {
         newGame.obstacles.generate('asteroid');
     }, 3000);
@@ -73,7 +70,7 @@ export function initialGame() {        //erstellt neues Game Objekt
         newGame.obstacles.move(newGame);
         newGame.character.applyGravity()
         newGame.character.collisionCheck(newGame.obstacles.obstaclesArray, newGame);
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animate); //rekrusiver aufruf 60fps +
     }
     animate();
 }

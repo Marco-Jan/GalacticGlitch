@@ -22,8 +22,8 @@ class Obstacle {
             this.element.style.height = this.height + 'px';
 
             // console.log(this.element);
-
         }
+        
 
         this.positionX = positionX;
         this.positionY = positionY;
@@ -56,7 +56,7 @@ export default class Obstacles {
         const container = document.getElementById('container');
         const containerWidth = container.offsetWidth;
         const containerHeight = container.offsetHeight;  // Spielfeldhöhe
-        const minHeight = 50;  // Mindesthöhe eines Hindernisses
+        const minHeight = 50;  // Mindesthöhe eines Hindernisses 
         const gap = 350;
         const maxHeight = containerHeight - gap - minHeight;  // Maximale Höhe eines Hindernisses
 
