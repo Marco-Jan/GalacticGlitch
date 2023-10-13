@@ -7,8 +7,8 @@ export default class Character {
         this.element.style.backgroundImage = "url('../img/spaceShip_Char.png')";
         this.velocity = 0;
         this.life = 3;
-        this.innerWidth = 40;  // Oder eine andere Größe, die zum inneren Bild des Charakters passt
-        this.innerHeight = 40;
+        this.innerWidth = 30;  // innere hit box
+        this.innerHeight = 30;
         this.rocketFlame = document.createElement('div');
         this.rocketFlame.className = 'flame';
         this.rocketFlame.style.display = 'none';
@@ -18,10 +18,12 @@ export default class Character {
     }
 
     move(newPositionX, newPositionY) {
-        // Grenzwerte 
-        const container = document.getElementById('container');
+        
         const maxOben = container.offsetWidth - this.innerWidth;  
         const maxUnten = container.offsetHeight - this.innerHeight;  
+
+        this.positionX = newPositionX;
+        this.positionY = newPositionY;
     
         // Überprüfen, ob die neue Position innerhalb der Grenzen liegt
         if (newPositionX < 0) newPositionX = 0;
@@ -30,8 +32,7 @@ export default class Character {
         if (newPositionY > maxUnten) newPositionY = maxUnten;
     
         // Position aktualisieren
-        this.positionX = newPositionX;
-        this.positionY = newPositionY;
+        
         this.updatePosition();
     }
     
@@ -58,7 +59,6 @@ export default class Character {
                 }, 500);
 
                 newGame.gameOver();
-                console.log('game over');
             }
         });
     }

@@ -20,18 +20,18 @@ export function initialGame() {        //erstellt neues Game Objekt
 
 
 
-    
 
-    setInterval(() => { 
+
+    setInterval(() => {
         newGame.obstacles.generate('asteroid');
-    }, 3000);  
-    
-    setInterval(() => { 
+    }, 3000);
+
+    setInterval(() => {
         newGame.obstacles.generate('spaceship');
-    }, 2500);  
-    
-    
-    setInterval(() => { 
+    }, 2500);
+
+
+    setInterval(() => {
         newGame.timer.increment();
     }, 1000);  // Timer Intervalsetzen 1000 = 1 s nicht ändern!!!!
 
@@ -49,7 +49,7 @@ export function initialGame() {        //erstellt neues Game Objekt
             rocketSound.currentTime = 0;
             rocketSound.play();
 
-        }else if (key === 's') newGame.character.velocity = 1;
+        } else if (key === 's') newGame.character.velocity = 1;
         else if (key === 'a') newX -= 10;
         else if (key === 'd') newX += 10;
 
@@ -63,11 +63,11 @@ export function initialGame() {        //erstellt neues Game Objekt
     });
 
 
-    document.getElementById('restartButton').addEventListener('click', () => {  
+    document.getElementById('restartButton').addEventListener('click', () => {
         newGame.restart();
-        
+
     });
-      
+
 
     function animate() {
         newGame.obstacles.move(newGame);
