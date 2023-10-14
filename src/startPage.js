@@ -7,7 +7,7 @@ function initStartPage() {
 
 
         startButton.id = "start_btn";
-        startScreen.style.backgroundImage = "url('../img/deep_space_webb.png')";
+        startScreen.style.backgroundImage = "url('../src/img/deep_space_webb.png')";
 
         // Highscores 
 

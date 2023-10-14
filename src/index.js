@@ -69,7 +69,7 @@ export function initialGame() {        //erstellt neues Game Objekt
     function animate() {
         newGame.obstacles.move(newGame);
         newGame.character.applyGravity()
-        newGame.character.collisionCheck(newGame.obstacles.obstaclesArray, newGame);
+        // newGame.character.collisionCheck(newGame.obstacles.obstaclesArray, newGame);
         requestAnimationFrame(animate); //rekrusiver aufruf 60fps +
     }
     animate();

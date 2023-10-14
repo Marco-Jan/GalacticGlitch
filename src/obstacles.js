@@ -12,12 +12,12 @@ class Obstacle {
         this.innerHeight = this.height - 50; // innere hitbox Größe
 
         if (type === 'asteroid') {
-            this.element.style.backgroundImage = "url('../img/space_ship.png')";
+            this.element.style.backgroundImage = "url('../src/img/space_ship.png')";
             this.element.style.width = this.width + 'px';
             this.element.style.height = this.height + 'px';
 
         } else if (type === 'spaceship') {
-            this.element.style.backgroundImage = "url('../img/asteroid-isolated.png')";
+            this.element.style.backgroundImage = "url('../src/img/asteroid-isolated.png')";
             this.element.style.width = this.width + 'px';
             this.element.style.height = this.height + 'px';
 
@@ -42,7 +42,7 @@ class Obstacle {
     }
 
     move() {
-        this.positionX -= 1;  // Geschwindigkeit der Hindernisse
+        this.positionX -= 0.61;  // Geschwindigkeit der Hindernisse
         this.updatePosition();
     }
 }
@@ -56,8 +56,8 @@ export default class Obstacles {
         const container = document.getElementById('container');
         const containerWidth = container.offsetWidth;
         const containerHeight = container.offsetHeight;  // Spielfeldhöhe
-        const minHeight = 50;  // Mindesthöhe eines Hindernisses 
-        const gap = 350;
+        const minHeight = 20;  // Mindesthöhe eines Hindernisses 
+        const gap = 250;
         const maxHeight = containerHeight - gap - minHeight;  // Maximale Höhe eines Hindernisses
 
         const randomPositionY = Math.floor(Math.random() * (maxHeight - minHeight) + minHeight);

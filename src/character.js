@@ -4,7 +4,7 @@ export default class Character {
         this.element = document.getElementById("character");
         this.positionX = positionX;
         this.positionY = positionY;
-        this.element.style.backgroundImage = "url('../img/spaceShip_Char.png')";
+        this.element.style.backgroundImage = "url('../src/img/spaceShip_Char.png')";
         this.velocity = 0;
         this.life = 3;
         this.innerWidth = 30;  // innere hit box
@@ -12,7 +12,7 @@ export default class Character {
         this.rocketFlame = document.createElement('div');
         this.rocketFlame.className = 'flame';
         this.rocketFlame.style.display = 'none';
-        this.rocketFlame.style.backgroundImage = "url('../img/flame.png')";
+        this.rocketFlame.style.backgroundImage = "url('../src/img/flame.png')";
         document.getElementById('container').appendChild(this.rocketFlame);
         this.updatePosition();
     }
@@ -73,7 +73,7 @@ export default class Character {
         // Dynamisch die untere Grenze ermitteln
         const container = document.getElementById('container');
         const maxY = container.offsetHeight - this.innerHeight;  // Containerhöhe - Char
-        console.log(container.offsetHeight);
+        
         if (this.positionY > maxY) {
             this.positionY = maxY;
             this.velocity = 0;
