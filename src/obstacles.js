@@ -42,7 +42,7 @@ class Obstacle {
     }
 
     move() {
-        this.positionX -= 0.61;  // Geschwindigkeit der Hindernisse
+        this.positionX -= 2;  // Geschwindigkeit der Hindernisse
         this.updatePosition();
     }
 }

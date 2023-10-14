@@ -1,12 +1,20 @@
 
 export default class Character {
     constructor({ positionX, positionY }) {
-        this.element = document.getElementById("character");
+        // Container für den Charakter
+        const container = document.getElementById('container');
+
+        // Erzeuge das Charakter-Element
+        this.element = document.createElement('div');
+        this.element.id = 'character';
+        this.element.style.backgroundImage = "url('../src/img/spaceShip_Char.png')";
+        container.appendChild(this.element);
         this.positionX = positionX;
         this.positionY = positionY;
         this.element.style.backgroundImage = "url('../src/img/spaceShip_Char.png')";
         this.velocity = 0;
         this.life = 3;
+        this.collisionDetect = false;
         this.innerWidth = 30;  // innere hit box
         this.innerHeight = 30;
         this.rocketFlame = document.createElement('div');
@@ -52,14 +60,13 @@ export default class Character {
                 this.innerX + this.innerWidth > obstacle.innerX &&
                 this.innerY < obstacle.innerY + obstacle.innerHeight &&
                 this.innerY + this.innerHeight > obstacle.innerY) {
-
-                newGame.gameOver();
+                    console.log('game over');
+                            
 
                 // newGame.collisionDetected = true;
                 setTimeout(() => {
-                    newGame.reset();
+                    newGame.gameOver();
                 }, 500);
-
 
             }
         });

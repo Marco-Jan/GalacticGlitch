@@ -2,33 +2,35 @@ import { initialGame } from './index.js';
 
 function initStartPage() {
     document.addEventListener('DOMContentLoaded', () => {
-        const startButton = document.getElementById('startButton');
-        const startScreen = document.getElementById('startScreen');
+        // Erstelle den Startbildschirm und den Startbutton
+        const container = document.getElementById('container');
+        const startScreen = document.createElement('div');
+        const startButton = document.createElement('button');
 
-
-        startButton.id = "start_btn";
+        // Setze die IDs und andere Attribute
+        startScreen.id = 'startScreen';
+        startButton.id = 'start_btn';
         startScreen.style.backgroundImage = "url('../src/img/deep_space_webb.png')";
+        startButton.innerHTML = 'Start Game';
 
-        // Highscores 
+        // Füge sie dem Container hinzu
+        startScreen.appendChild(startButton);
+        container.appendChild(startScreen);
 
-
-        // Highscores 
-
-
+        // Event-Listener für den Startbutton
         startButton.addEventListener('click', () => {
-            // Startbildschirm verbergen
+            // Verberge den Startbildschirm
             startScreen.style.display = 'none';
             const audioElement = document.getElementById('backgroundMusic');
-            audioElement.play();
+            if (audioElement) {
+                audioElement.play();
+            }
 
-            // Spiel starten
+            // Starte das Spiel
             initialGame();
         });
-
-
     });
-
-
 }
 
 export default initStartPage;
+
