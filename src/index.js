@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import Game from './game.js';
 import initStartPage from './startPage.js';
+import sounds from './soundboard.js';
 
 
 
@@ -14,9 +15,11 @@ initStartPage();
 let newGame;
 
 
-export function initialGame() {        //erstellt neues Game Objekt
-    newGame = new Game();
+export function initialGame(playerName) {        //erstellt neues Game Objekt
+    playerName = document.getElementById('nameInput').value ;
+    newGame = new Game(playerName);
     newGame.draw();
+    newGame.displayName();
 
 
     setInterval(() => {
@@ -43,8 +46,8 @@ export function initialGame() {        //erstellt neues Game Objekt
         if (key === 'w') {
             newGame.character.velocity = -1;
             newGame.character.toggleFlame(true);
-            rocketSound.currentTime = 0;
-            rocketSound.play();
+            sounds.rocketSound.currentTime = 0;
+            sounds.rocketSound.play();
 
         } else if (key === 's') newGame.character.velocity = 1;
         else if (key === 'a') newX -= 10;
@@ -58,7 +61,6 @@ export function initialGame() {        //erstellt neues Game Objekt
             newGame.character.toggleFlame(false);
         }
     });
-
 
     // document.getElementById('restartButton').addEventListener('click', () => {
     //     newGame.restart();

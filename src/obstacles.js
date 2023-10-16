@@ -76,7 +76,7 @@ export default class Obstacles {
         if (!newGame.isPaused) {
             this.obstaclesArray.forEach((obstacle, index) => {
                 obstacle.move();
-                if (obstacle.positionX < -50) {
+                if (obstacle.positionX < -30) {
                     obstacle.element.remove();
                     this.obstaclesArray.splice(index, 1);
                 }

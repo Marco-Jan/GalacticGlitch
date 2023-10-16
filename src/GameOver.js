@@ -1,3 +1,8 @@
+import { init } from 'es-module-lexer';
+import sounds from './soundboard.js';
+import { initialGame } from './index.js';
+import initStartPage from './startPage.js';
+
 
 export default class GameOverScreen {
     constructor(resetGameCallback) {
@@ -15,6 +20,7 @@ export default class GameOverScreen {
         // Erstelle das GameOver-Fenster
         this.gameOverDiv = document.createElement('div');
         this.gameOverDiv.id = 'gameOverScreen';
+        
 
         // Erstelle den Game Over-Text
         const gameOverText = document.createElement('h1');
@@ -27,16 +33,29 @@ export default class GameOverScreen {
         resetButton.innerHTML = 'Restart';
         this.gameOverDiv.appendChild(resetButton);
 
+        const homeButton = document.createElement('button');
+        homeButton.id = 'home_btn';
+        homeButton.innerHTML = 'Home';
+        this.gameOverDiv.appendChild(homeButton);
+
         // Füge das GameOver-Fenster zum Body hinzu
         document.body.appendChild(this.gameOverDiv);
+        sounds.backgroundSound.play();
 
         // Event-Listener für den Reset-Button
         resetButton.addEventListener('click', () => {
             this.hide();
             this.resetGameCallback();
+            
         });
 
+        homeButton.addEventListener('click', () => {
+            location.reload();
+            
+        })
+
         this.gameOverShown = true;
+        
     }
 
     hide() {

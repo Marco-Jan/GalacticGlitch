@@ -2,19 +2,34 @@ import Character from './character.js';
 import Obstacles from './obstacles.js';
 import Timer from './timer.js';
 import GameOverScreen from './GameOver.js';
+import sounds from './soundboard.js';
+import { saveHighscore } from './highscores.js';
 
 
 
 export default class Game {
-    constructor() {
+    constructor(playerName) {
         this.background = "url('../src/img/carina_bg.jpeg')";
         this.character = new Character({ positionX: 600, positionY: 345 });
         this.obstacles = new Obstacles();
         this.timer = new Timer();
         this.isPaused = false;
+        this.playerName = playerName;
         this.collisionDetected = false;
         this.gameOverScreen = new GameOverScreen(() => this.resetGame());
     }
+
+    displayName() {
+        
+        const playerNameDisplay = document.createElement('div');
+        
+        playerNameDisplay.innerText = `Player: ${this.playerName}`;
+        playerNameDisplay.id = 'playerNameDisplayId';
+        
+        const container = document.getElementById('container');
+        container.appendChild(playerNameDisplay);
+    }
+    
 
     draw() {
         const container = document.querySelector('#container');
@@ -33,26 +48,19 @@ export default class Game {
             obstacle.element.remove();
         });
         this.obstacles.obstaclesArray = [];
-
+        this.isPaused = false;
         this.obstacles.generate();
 
     }
 
     gameOver() {
-        const audioElement = document.getElementById('backgroundMusic');
-        audioElement.pause();
-
+        const currentScore = this.timer.score;
+        saveHighscore(currentScore, this.playerName);
         this.gameOverScreen.show();
+        sounds.backgroundSound.currentTime = 0;
+
     }
 
-    
-    // restart() {
-    //     this.reset();
-    //     document.getElementById('gameOverContainer').classList.add('hidden');
-    //     this.isPaused = false; // setzt  false in der move() obstacles methode  
 
-    // }
 
 }
-
-

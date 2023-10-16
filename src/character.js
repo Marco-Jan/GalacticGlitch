@@ -1,4 +1,5 @@
 
+
 export default class Character {
     constructor({ positionX, positionY }) {
         // Container für den Charakter
@@ -11,9 +12,8 @@ export default class Character {
         container.appendChild(this.element);
         this.positionX = positionX;
         this.positionY = positionY;
-        this.element.style.backgroundImage = "url('../src/img/spaceShip_Char.png')";
         this.velocity = 0;
-        this.life = 3;
+        // this.life = 3;
         this.collisionDetect = false;
         this.innerWidth = 30;  // innere hit box
         this.innerHeight = 30;
@@ -61,6 +61,7 @@ export default class Character {
                 this.innerY < obstacle.innerY + obstacle.innerHeight &&
                 this.innerY + this.innerHeight > obstacle.innerY) {
                     console.log('game over');
+                    newGame.isPaused = true;
                             
 
                 // newGame.collisionDetected = true;
